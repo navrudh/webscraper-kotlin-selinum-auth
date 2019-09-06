@@ -1,4 +1,3 @@
-import com.gargoylesoftware.htmlunit.util.UrlUtils
 import com.xenomachina.argparser.ArgParser
 
 class ArgParserService(parser: ArgParser) {
@@ -8,7 +7,7 @@ class ArgParserService(parser: ArgParser) {
     )
 
     val username by parser.storing(
-        "-U", "--user",
+        "-U", "--username",
         help = "Username"
     )
 
@@ -26,7 +25,7 @@ class ArgParserService(parser: ArgParser) {
     val url by parser.positional(
         "URL",
         help = "source url"
-    ) { UrlUtils.toUrlSafe(this) }
+    )
 
     val destination by parser.positional(
         "DEST",

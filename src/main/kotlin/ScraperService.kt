@@ -5,14 +5,13 @@ import java.net.URL
 class ScraperService {
     private val driver = ChromeDriver()
 
-    fun scrape(url: URL, searchStrings: List<String>): Map<String, List<String>> {
-        driver.get(url.toString())
+    fun scrape(url: String, searchStrings: List<String>): Map<String, List<String>> {
+        driver.get(url)
 
-        val hrefs = driver.findElements(By.tagName("a"));
+        val hrefs = driver.findElements(By.tagName("a")).mapNotNull { href -> href.getAttribute("href") }
 
         val searchResults = searchStrings.map { searchTerm ->
             searchTerm to hrefs
-                .map { href -> href.getAttribute("href") }
                 .filter { hrefText ->
                     hrefText.contains(searchTerm)
                 }
